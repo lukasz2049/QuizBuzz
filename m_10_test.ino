@@ -1,7 +1,7 @@
 /**
- * Executed once, before entering the mode
- */
-void BeforeModeTest() { 
+   Executed once, before entering the mode
+*/
+void BeforeModeTest() {
   for (i = 0; i < maxPlayerBoxes; i++)
   {
     if ( player[i]->isConnected() ) {
@@ -16,26 +16,26 @@ void BeforeModeTest() {
 }
 
 /**
- * Executed in a loop
- */
+   Executed in a loop
+*/
 void ModeTest() {
   for (i = 0; i < maxPlayerBoxes; i++)
   {
-      player[i]->buzzIfButtonPressed();
-      player[i]->lightIfButtonPressed();
-      if(player[i]->isButtonPressed()) {
-        Serial.println(String(i));
-      }
+    player[i]->buzzIfButtonPressed();
+    player[i]->lightIfButtonPressed();
+    if (player[i]->isButtonPressed()) {
+      Serial.println(String(i));
+    }
   }
 
-  if(digitalRead(pinButtonConfirm) == LOW) {
+  if (digitalRead(pinButtonConfirm) == LOW) {
     changeMode(Modes::PREGAME);
   }
 }
 
 /**
- * Executed once, after exiting the mode
- */
+   Executed once, after exiting the mode
+*/
 void AfterModeTest() {
-  
+
 }

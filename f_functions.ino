@@ -15,12 +15,16 @@ void DisableAllLights() {
 void EnableAllActiveLights() {
   for (i = 0; i < maxPlayerBoxes; i++)
   {
-    if( player[i]->isActive() ){
+    if ( player[i]->isActive() ) {
       player[i]->setLights(HIGH);
     }
   }
 }
 
+/**
+   Changes mode and runs before/after functions
+   (After previous mode, Before new mode)
+*/
 void changeMode(int newMode) {
   // Wait until the button is released
   while (digitalRead(pinButtonConfirm) == LOW) {
@@ -28,7 +32,7 @@ void changeMode(int newMode) {
   }
 
   // Prepare to changing the mode if needed
-  switch(currentMode) {
+  switch (currentMode) {
     case Modes::PREGAME:
       AfterModePregame();
       break;
@@ -50,7 +54,7 @@ void changeMode(int newMode) {
   Serial.println("Entering mode " + String(newMode));
 
   // Prepare to changing the mode if needed
-  switch(newMode) {
+  switch (newMode) {
     case Modes::PREGAME:
       BeforeModePregame();
       break;
@@ -67,7 +71,7 @@ void changeMode(int newMode) {
       BeforeModeTest();
       break;
   }
-  
+
   currentMode = newMode;
 }
 

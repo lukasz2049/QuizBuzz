@@ -1,5 +1,5 @@
 void loop() {
-  switch(currentMode) {
+  switch (currentMode) {
     case Modes::PREGAME:
       ModePregame();
       break;

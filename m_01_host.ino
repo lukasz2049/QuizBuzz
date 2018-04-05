@@ -1,24 +1,25 @@
 /**
- * Executed once, before entering the mode
- */
+   Executed once, before entering the mode
+*/
 void BeforeModeHost() {
   DisableAllLights();
+  DisableAllBuzzers();
   digitalWrite(pinHostLight, HIGH);
 }
 
 /**
- * Executed in a loop
- */
+   Executed in a loop
+*/
 void ModeHost() {
   //Serial.println("Host");
-  if(digitalRead(pinButtonConfirm) == LOW) {
+  if (digitalRead(pinButtonConfirm) == LOW) {
     changeMode(Modes::QUESTION);
   }
 }
 
 /**
- * Executed once, after exiting the mode
- */
+   Executed once, after exiting the mode
+*/
 void AfterModeHost() {
   digitalWrite(pinHostLight, LOW);
 }

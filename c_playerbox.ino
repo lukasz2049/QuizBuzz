@@ -12,7 +12,7 @@ class PlayerBox {
     int questions = 0;
     int answersCorrect = 0;
     int answersIncorrect = 0;
-    
+
     PlayerBox(int button, int lights, int buzzer, int ground) {
       pinButton = button;
       pinLights = lights;
@@ -28,11 +28,11 @@ class PlayerBox {
       digitalWrite(pinBuzzer, LOW);
 
       stateConnected = false;
-      if( LOW == digitalRead(pinButton) ) {
+      if ( LOW == digitalRead(pinButton) ) {
         stateConnected = true;
         connectedPlayerBoxes++;
       }
-      
+
     }
     boolean isActive() {
       return stateActive;
@@ -44,7 +44,7 @@ class PlayerBox {
       return ( LOW != digitalRead(pinButton) && isConnected() );
     }
     void setBuzzer(uint8_t value) {
-      if(silent) {
+      if (silent) {
         return;
       }
       digitalWrite(pinBuzzer, value);
@@ -53,16 +53,16 @@ class PlayerBox {
       digitalWrite(pinLights, value);
     }
     void setStateActive(boolean value) {
-      if(stateActive == value) {
+      if (stateActive == value) {
         return;
       }
-      
-      if(value) {
+
+      if (value) {
         activePlayers++;
       } else {
         activePlayers--;
       }
-      
+
       stateActive = value;
     }
     void setStateConnected(boolean value) {

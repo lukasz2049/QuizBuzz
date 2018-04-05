@@ -4,7 +4,7 @@ int selectedPlayer;
 
 int pinButtonConfirm;
 int pinButtonCancel;
-int pinHostLight = LED_BUILTIN;
+int pinHostLight;
 
 bool silent = false;
 
