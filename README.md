@@ -7,6 +7,8 @@ for Arduino (WIP)
 In this mode players are joining the game by pressing the button.  
 Game begins (in _Host Mode_) either when the Host decides by pressing the **Confirm** button, or when buttons on all connected _Player Boxes_ were pressed.
 
+TODO: Game settings
+
 ### 1: HOST
 This mode is indicated by the **Host LED**.  
 In this mode Host will be able to prepare before reading the question.  
@@ -18,9 +20,16 @@ The first person to press the button will be in the _Answer Mode_,
 
 ### 3. ANSWER
 This mode indicated by selected _Player Box_ ligting up.  
-**Confirm** to check the answer as correct, **Cancel** to check it as incorrect.
-After checking the answer game will return to the _Host Mode_
+**Confirm** to check the answer as correct. Player's score will be indicated by a number of light blinks.
+**Cancel** to check it as incorrect. Player's remaining lives will be indicated by a number of buzzer blinks. If a Player has no lives left a long, quieter buzz will occur.
+
+Game will now return to the _Host Mode_ or change to the _End Mode_.
+
 TODO: RGB LED on _Host Box_ to indicate the player.
+
+### 9. END
+This mode is not active yet.
+This mode is indicated by a rapid blinking of the lights of Player who won.
 
 ### 10: TEST
 Debug mode.
@@ -37,6 +46,8 @@ Debug mode.
 - 1 LCD Display (optional)
 - 1 power supply (7-12V)
 - Some wires ;)
+- 1 SSD1306 screen (optional, **not supported yet**)
+- 1 YX5300 mp3 module & a microSD card (optional, **not supported yet**)
 
 Per player:
 - 1 big colorful arcade button (look for "_60mm arcade buttons_" on Aliexpress or eBay)
@@ -49,7 +60,7 @@ Per player:
 - 1 transistor (optional) for driving a vibration motor
 
 ### Notes:
-S-Video is in my opinion the best choice if you want for the buttons to be detachable. It has 4 pins: LED, button, motor & GND. Just make sure that the cable has separate wires 1 and 2.  
+S-Video is in my opinion the best choice if you want for the buttons to be detachable. It has 4 pins: LED, button, motor & GND. Just make sure that the cable has separate wires 1 and 2.
 
 A typical vibration motor works is designed for voltage from 1.5-2V up to 3.5-5V. Most of them are described as 3V units but should work with 5V just fine.  
 Details: https://www.adafruit.com/product/1201  
