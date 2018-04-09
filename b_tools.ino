@@ -1,25 +1,10 @@
-void DisableAllBuzzers() {
-  for (i = 0; i < maxPlayerBoxes; i++)
-  {
-    player[i]->setBuzzer(LOW);
-  }
-}
+// Basic Functions - Tools
 
-void DisableAllLights() {
-  for (i = 0; i < maxPlayerBoxes; i++)
-  {
-    player[i]->setLights(LOW);
-  }
-}
+/**
+   Resets Arduino
+*/
+void(* resetFunction) (void) = 0;
 
-void EnableAllActiveLights() {
-  for (i = 0; i < maxPlayerBoxes; i++)
-  {
-    if ( player[i]->isActive() ) {
-      player[i]->setLights(HIGH);
-    }
-  }
-}
 
 /**
    Changes mode and runs before/after functions
@@ -45,6 +30,9 @@ void changeMode(int newMode) {
     case Modes::ANSWER:
       AfterModeAnswer();
       break;
+    case Modes::END:
+      AfterModeEnd();
+      break;
     case Modes::TEST:
       AfterModeTest();
       break;
@@ -67,6 +55,9 @@ void changeMode(int newMode) {
     case Modes::ANSWER:
       BeforeModeAnswer();
       break;
+    case Modes::END:
+      BeforeModeEnd();
+      break;
     case Modes::TEST:
       BeforeModeTest();
       break;
@@ -75,3 +66,32 @@ void changeMode(int newMode) {
   currentMode = newMode;
 }
 
+/**
+   Host Light
+*/
+void setHostLight(uint8_t value) {
+  digitalWrite(pinHostLight, value);
+}
+
+/**
+   Blinks n times
+   @todo use millis instead of delay
+*/
+void blinker(int pin, int n, int blinkInterval = 400, int pauseInterval = 250) {
+  if (n < 1) {
+    return;
+  }
+
+  uint8_t statePause = digitalRead(pin);
+  uint8_t stateBlink = !statePause;
+
+  delay(pauseInterval);
+
+  for (i = 0; i < n; i++) {
+    digitalWrite(pin, stateBlink);
+    delay(blinkInterval);
+
+    digitalWrite(pin, statePause);
+    delay(pauseInterval);
+  }
+}

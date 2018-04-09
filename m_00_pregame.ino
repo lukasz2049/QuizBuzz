@@ -2,7 +2,7 @@
    Executed once, before entering the mode
 */
 void BeforeModePregame() {
-  DisableAllLights();
+  disableAllLights();
 }
 
 /**
@@ -32,5 +32,6 @@ void ModePregame() {
 */
 void AfterModePregame() {
   delay(500);
-  DisableAllBuzzers();
+  disableAllBuzzers();
+  soundGameStart();
 }

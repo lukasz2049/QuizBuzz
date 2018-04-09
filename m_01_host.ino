@@ -2,9 +2,9 @@
    Executed once, before entering the mode
 */
 void BeforeModeHost() {
-  DisableAllLights();
-  DisableAllBuzzers();
-  digitalWrite(pinHostLight, HIGH);
+  disableAllLights();
+  disableAllBuzzers();
+  setHostLight(HIGH);
 }
 
 /**
@@ -15,12 +15,23 @@ void ModeHost() {
   if (digitalRead(pinButtonConfirm) == LOW) {
     changeMode(Modes::QUESTION);
   }
+
+  for (i = 0; i < maxPlayerBoxes; i++)
+  {
+    if (!player[i]->isActive()) {
+      continue;
+    }
+    if (LOW == digitalRead(playerSelect[i])) {
+      selectedPlayer = i;
+      changeMode(Modes::ANSWER);
+    }
+  }
 }
 
 /**
    Executed once, after exiting the mode
 */
 void AfterModeHost() {
-  digitalWrite(pinHostLight, LOW);
+  setHostLight(LOW);
 }
 

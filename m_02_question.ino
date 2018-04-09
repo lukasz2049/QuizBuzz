@@ -2,20 +2,25 @@
    Executed once, before entering the mode
 */
 void BeforeModeQuestion() {
-  EnableAllActiveLights();
+  enableAllActiveLights();
   questionNumber++;
+  delay(100);
 }
 
 /**
    Executed in a loop
 */
 void ModeQuestion() {
-  delay(100);
+  // delay(100);
   bool pressedButtons[maxPlayerBoxes];
   int pressedButtonsCounter = 0;
 
+  if (digitalRead(pinButtonCancel) == LOW) {
+    changeMode(Modes::HOST);
+  }
+
+  // TODO: move to Before, optimize
   for (i = 0; i < maxPlayerBoxes; i++) {
-    Serial.println("i=" + String(i));
     pressedButtons[i] = false;
 
     if ( !player[i]->isConnected() || !player[i]->isActive() ) {
@@ -52,10 +57,6 @@ void ModeQuestion() {
    Executed once, after exiting the mode
 */
 void AfterModeQuestion() {
-  DisableAllLights();
-  player[selectedPlayer]->questions++;
-  player[selectedPlayer]->setLights(HIGH);
-  player[selectedPlayer]->setBuzzer(HIGH);
-  delay(500);
-  player[selectedPlayer]->setBuzzer(LOW);
+  disableAllLights();
+  disableAllBuzzers();
 }
