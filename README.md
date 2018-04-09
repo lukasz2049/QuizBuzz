@@ -13,15 +13,18 @@ TODO: Game settings
 This mode is indicated by the **Host LED**.  
 In this mode Host will be able to prepare before reading the question.  
 Press **Confirm** to continue to the _Question Mode_.
+Press **Center** button to select a random active player.
+Press **Player** button to select an active player.
 
 ### 2: QUESTION
 This mode is indicated by all active _Player Boxes_ lighting up.  
 The first person to press the button will be in the _Answer Mode_,
+Press **Cancel** to go back to the _Host Mode_.
 
 ### 3. ANSWER
 This mode indicated by selected _Player Box_ ligting up.  
-**Confirm** to check the answer as correct. Player's score will be indicated by a number of light blinks.
-**Cancel** to check it as incorrect. Player's remaining lives will be indicated by a number of buzzer blinks. If a Player has no lives left a long, quieter buzz will occur.
+Press **Confirm** to check the answer as correct. Player's score will be indicated by a number of light blinks.
+Press **Cancel** to check it as incorrect. Player's remaining lives will be indicated by a number of buzzer blinks. If a Player has no lives left a long, quieter buzz will occur.
 
 Game will now return to the _Host Mode_ or change to the _End Mode_.
 
@@ -37,6 +40,7 @@ Debug mode.
 ## Modifiers
 -Debug Mode: Press the **Confirm** button while powering on the machine.  
 -Disable vibrations: Press the **Cancel** button while powering on the machine.  
+-Reset: Press and hold the **Center** button for a few seconds.
 
 ## Hardware needed 
 - 1 Arduino Mega (Due should also work fine, just keep in mind it's 3.3V)
