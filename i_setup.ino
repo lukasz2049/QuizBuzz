@@ -3,6 +3,8 @@ void setup() {
   Serial.println("");
   Serial.println("QuizBuzz for Arduino!");
 
+  randomSeed(analogRead(0));
+
   pinButtonCancel = 8;
   pinButtonConfirm = 9;
   pinButtonCenter = 10;

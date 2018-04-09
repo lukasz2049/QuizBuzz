@@ -16,9 +16,15 @@ void ModeHost() {
     changeMode(Modes::QUESTION);
   }
 
+  if (digitalRead(pinButtonCenter) == LOW) {
+    selectedPlayer = getRandomActivePlayer();
+    changeMode(Modes::ANSWER);
+    return;
+  }
+
   for (i = 0; i < maxPlayerBoxes; i++)
   {
-    if (!player[i]->isActive()) {
+    if ( !player[i]->isActive() ) {
       continue;
     }
     if (LOW == digitalRead(playerSelect[i])) {

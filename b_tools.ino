@@ -41,6 +41,8 @@ void changeMode(int newMode) {
   Serial.println();
   Serial.println("Entering mode " + String(newMode));
 
+  currentMode = newMode;
+
   // Prepare to changing the mode if needed
   switch (newMode) {
     case Modes::PREGAME:
@@ -62,8 +64,6 @@ void changeMode(int newMode) {
       BeforeModeTest();
       break;
   }
-
-  currentMode = newMode;
 }
 
 /**
@@ -75,9 +75,10 @@ void setHostLight(uint8_t value) {
 
 /**
    Blinks n times
-   @todo use millis instead of delay
+   @todo create a blinker function with millis instead of delay (with a global array with milis per pin?)
+   @todo reuse this function as PWM
 */
-void blinker(int pin, int n, int blinkInterval = 400, int pauseInterval = 250) {
+void blinker(int pin, int n, int blinkInterval = 200, int pauseInterval = 150) {
   if (n < 1) {
     return;
   }

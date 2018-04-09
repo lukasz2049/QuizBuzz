@@ -1,10 +1,10 @@
 /**
- * PlayerBox:
- * 
- * int button - pin
- * int lights - pin
- * int buzzer - pin
- */
+   PlayerBox:
+
+   int button - pin
+   int lights - pin
+   int buzzer - pin
+*/
 class PlayerBox {
     int pinButton = 0;
     int pinLights = 0;
@@ -24,7 +24,7 @@ class PlayerBox {
       pinButton = button;
       pinLights = lights;
       pinBuzzer = buzzer;
-      
+
       pinMode(pinButton, INPUT_PULLUP);
       pinMode(pinLights, OUTPUT);
       pinMode(pinBuzzer, OUTPUT);
@@ -40,7 +40,7 @@ class PlayerBox {
 
     }
     boolean isActive() {
-      if (!isConnected()) {
+      if ( !isConnected() ) {
         return false;
       }
       return stateActive;
@@ -99,12 +99,12 @@ class PlayerBox {
       answersIncorrect++;
       lastAnswerCorrect = false;
       soundIncorrect();
-      
+
       lives--;
-      
-      if(lives < 1) {
+
+      if (lives < 1) {
         stateActive = false;
-        blinker(pinBuzzer, 20, 20, 10);
+        blinker(pinBuzzer, 20, 20, 15);
       }
 
     }

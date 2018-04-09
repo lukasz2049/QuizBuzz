@@ -5,52 +5,35 @@ void BeforeModeQuestion() {
   enableAllActiveLights();
   questionNumber++;
   delay(100);
+
+  // If players are already holding the buttons - let's choose a random one
+  int randomPlayer = getRandomActivePlayer(true);
+  if (-1 != randomPlayer) {
+    selectedPlayer = randomPlayer;
+    Serial.println("Player " + String(selectedPlayer) + " was luckiest");
+    changeMode(Modes::ANSWER);
+  }
+
 }
 
 /**
    Executed in a loop
 */
 void ModeQuestion() {
-  // delay(100);
-  bool pressedButtons[maxPlayerBoxes];
-  int pressedButtonsCounter = 0;
 
   if (digitalRead(pinButtonCancel) == LOW) {
     changeMode(Modes::HOST);
   }
 
-  // TODO: move to Before, optimize
   for (i = 0; i < maxPlayerBoxes; i++) {
-    pressedButtons[i] = false;
-
-    if ( !player[i]->isConnected() || !player[i]->isActive() ) {
-      continue;
-    }
-
-    if (player[i]->isButtonPressed()) {
-      pressedButtons[i] = true;
-      pressedButtonsCounter++;
+    if ( player[i]->isButtonPressed() ) {
       selectedPlayer = i;
+      Serial.println("Player " + String(selectedPlayer) + " was fastest");
+      changeMode(Modes::ANSWER);
     }
   }
 
-  if ( 0 == pressedButtonsCounter ) {
-    return;
-  }
 
-  // There's a non-zero chance of two players pressing
-  // the button at the same time. Let's randomize it.
-  while ( 1 != pressedButtonsCounter ) {
-    selectedPlayer = random(0, maxPlayerBoxes);
-    // Not the best solution ever but works fine with only a few elements ;)
-    if ( pressedButtons[selectedPlayer] ) {
-      pressedButtonsCounter = 1;
-      player[selectedPlayer]->setBuzzer(HIGH);
-    }
-  }
-
-  Serial.println("Player " + String(selectedPlayer) + " was fastest");
-  changeMode(Modes::ANSWER);
 }
 
 /**

@@ -1,5 +1,4 @@
 void loop() {
-  int loopStartMs = millis();
   switch (currentMode) {
     case Modes::PREGAME:
       ModePregame();
@@ -21,9 +20,10 @@ void loop() {
       break;
   }
 
+  int startMs = millis();
   // Reset after 5s button hold
   while (LOW == digitalRead(pinButtonCenter) ) {
-    if ( 5000 < ( millis() - loopStartMs) ) {
+    if ( 6000 < ( millis() - startMs) ) {
       resetFunction();
     }
   }
