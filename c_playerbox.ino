@@ -21,47 +21,47 @@ class PlayerBox {
     bool lastAnswerCorrect = true;
 
     PlayerBox(int button, int lights, int buzzer) {
-      pinButton = button;
-      pinLights = lights;
-      pinBuzzer = buzzer;
+      this->pinButton = button;
+      this->pinLights = lights;
+      this->pinBuzzer = buzzer;
 
-      pinMode(pinButton, INPUT_PULLUP);
-      pinMode(pinLights, OUTPUT);
-      pinMode(pinBuzzer, OUTPUT);
+      pinMode(this->pinButton, INPUT_PULLUP);
+      pinMode(this->pinLights, OUTPUT);
+      pinMode(this->pinBuzzer, OUTPUT);
 
-      digitalWrite(pinLights, HIGH);
-      digitalWrite(pinBuzzer, LOW);
+      digitalWrite(this->pinLights, HIGH);
+      digitalWrite(this->pinBuzzer, LOW);
 
-      stateConnected = false;
-      if ( LOW == digitalRead(pinButton) ) {
-        stateConnected = true;
+      this->stateConnected = false;
+      if ( LOW == digitalRead(this->pinButton) ) {
+        this->stateConnected = true;
         connectedPlayerBoxes++;
       }
 
     }
     boolean isActive() {
-      if ( !isConnected() ) {
+      if ( !this->isConnected() ) {
         return false;
       }
-      return stateActive;
+      return this->stateActive;
     }
     boolean isConnected() {
-      return stateConnected;
+      return this->stateConnected;
     }
     boolean isButtonPressed() {
-      return ( LOW != digitalRead(pinButton) && isConnected() );
+      return ( LOW != digitalRead(this->pinButton) && this->isConnected() );
     }
     void setBuzzer(uint8_t value) {
       if (silent) {
         return;
       }
-      digitalWrite(pinBuzzer, value);
+      digitalWrite(this->pinBuzzer, value);
     }
     void setLights(uint8_t value) {
-      digitalWrite(pinLights, value);
+      digitalWrite(this->pinLights, value);
     }
     void setStateActive(boolean value) {
-      if (stateActive == value) {
+      if (this->stateActive == value) {
         return;
       }
 
@@ -71,53 +71,53 @@ class PlayerBox {
         activePlayers--;
       }
 
-      stateActive = value;
+      this->stateActive = value;
     }
     void setStateConnected(boolean value) {
-      stateActive = value;
+      this->stateActive = value;
     }
     void buzzIfButtonPressed() {
-      if (silent || !isConnected()) {
+      if (silent || !this->isConnected()) {
         return;
       }
-      digitalWrite(pinBuzzer, digitalRead(pinButton));
+      digitalWrite(this->pinBuzzer, digitalRead(this->pinButton));
     }
     void lightIfButtonPressed() {
-      if (!isConnected()) {
+      if (!this->isConnected()) {
         return;
       }
-      digitalWrite(pinLights, digitalRead(pinButton));
+      digitalWrite(this->pinLights, digitalRead(this->pinButton));
     }
     void handleCorrectAnswer() {
       Serial.println("Good answer! :)");
-      answersCorrect++;
-      lastAnswerCorrect = true;
+      this->answersCorrect++;
+      this->lastAnswerCorrect = true;
       soundCorrect();
     }
     void handleIncorrectAnswer() {
       Serial.println("Bad answer! :(");
-      answersIncorrect++;
-      lastAnswerCorrect = false;
+      this->answersIncorrect++;
+      this->lastAnswerCorrect = false;
       soundIncorrect();
 
-      lives--;
+      this->lives--;
 
       if (lives < 1) {
-        stateActive = false;
+        this->stateActive = false;
         blinker(pinBuzzer, 20, 20, 15);
       }
 
     }
     void debug() {
-      Serial.println( "button: " + String(pinButton) + ", lights: " + String(pinLights) + ", buzzer: " + String(pinBuzzer) );
+      Serial.println( "button: " + String(this->pinButton) + ", lights: " + String(this->pinLights) + ", buzzer: " + String(this->pinBuzzer) );
     }
     int getPinButton() {
-      return pinButton;
+      return this->pinButton;
     }
     int getPinLights() {
-      return pinLights;
+      return this->pinLights;
     }
     int getPinBuzzer() {
-      return pinBuzzer;
+      return this->pinBuzzer;
     }
 };
