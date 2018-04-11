@@ -31,10 +31,10 @@ Game will now return to the _Host Mode_ or change to the _End Mode_.
 TODO: RGB LED on _Host Box_ to indicate the player.
 
 ### 9. END
-This mode is not finished yet.
-This mode will be indicated by a rapid blinking of the Host Light.
-In this mode the lights of the winner(s) are turned on.
-Host may check the score of any player by pressing the corresponding player button.
+This mode is not finished yet.  
+This mode will be indicated by a rapid blinking of the Host Light.  
+In this mode the lights of the winner(s) are turned on.  
+Host may check the score of any player by pressing the corresponding player button.  
 
 ### 10: TEST
 Debug mode.
