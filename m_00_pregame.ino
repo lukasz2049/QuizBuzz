@@ -9,7 +9,7 @@ void BeforeModePregame() {
    Executed in a loop
 */
 void ModePregame() {
-  for (i = 0; i < maxPlayerBoxes; i++) {
+  forEachPlayerBox(i) {
     if ( player[i]->isButtonPressed() && !player[i]->isActive() ) {
       Serial.println("Player " + String(i) + " has joined");
       player[i]->setStateActive(true);
@@ -31,6 +31,9 @@ void ModePregame() {
    Executed once, after exiting the mode
 */
 void AfterModePregame() {
+  totalPlayers = activePlayers;
+  scoreToWin = scoreToWin - totalPlayers;
+  
   delay(500);
   disableAllBuzzers();
   soundGameStart();

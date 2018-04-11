@@ -25,7 +25,7 @@ void ModeQuestion() {
     changeMode(Modes::HOST);
   }
 
-  for (i = 0; i < maxPlayerBoxes; i++) {
+  forEachPlayerBox(i) {
     if ( player[i]->isButtonPressed() ) {
       selectedPlayer = i;
       Serial.println("Player " + String(selectedPlayer) + " was fastest");

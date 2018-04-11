@@ -2,8 +2,7 @@
    Executed once, before entering the mode
 */
 void BeforeModeTest() {
-  for (i = 0; i < maxPlayerBoxes; i++)
-  {
+  forEachPlayerBox(i) {
     if ( player[i]->isConnected() ) {
       Serial.println("Player's " + String(i) + " box connected");
     } else {
@@ -19,8 +18,7 @@ void BeforeModeTest() {
    Executed in a loop
 */
 void ModeTest() {
-  for (i = 0; i < maxPlayerBoxes; i++)
-  {
+  forEachPlayerBox(i) {
     player[i]->buzzIfButtonPressed();
     player[i]->lightIfButtonPressed();
     if (player[i]->isButtonPressed()) {

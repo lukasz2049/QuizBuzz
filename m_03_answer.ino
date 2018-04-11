@@ -22,7 +22,6 @@ void ModeAnswer() {
     changeMode(Modes::HOST);
   } else if (digitalRead(pinButtonCancel) == LOW) {
     player[selectedPlayer]->handleIncorrectAnswer();
-
     changeMode(Modes::HOST);
   }
 }
@@ -34,17 +33,15 @@ void AfterModeAnswer() {
   player[selectedPlayer]->setBuzzer(LOW);
   player[selectedPlayer]->setLights(LOW);
 
-  int pinBadAnswer = silent ? pinHostLight : player[selectedPlayer]->getPinBuzzer();
-
   if ( player[selectedPlayer]->lastAnswerCorrect ) {
-    blinker( player[selectedPlayer]->getPinLights(), player[selectedPlayer]->answersCorrect );
+    player[selectedPlayer]->showScore();
   } else {
-    blinker( pinBadAnswer, player[selectedPlayer]->lives );
+    player[selectedPlayer]->showLives();
   }
 
   Serial.println();
   Serial.println( "Current scores:" );
-  for (i = 0; i < maxPlayerBoxes; i++) {
+  forEachPlayerBox(i) {
     Serial.print( "Player " + String(i) + ": " );
     Serial.print( String(player[i]->answersCorrect - player[i]->answersIncorrect) ) ;
     Serial.print( " (+" + String(player[i]->answersCorrect) + ", -" + String(player[i]->answersIncorrect) + ")" );
@@ -52,5 +49,6 @@ void AfterModeAnswer() {
   }
 
   delay(500);
+
 }
 

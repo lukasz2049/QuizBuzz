@@ -1,24 +1,23 @@
 PlayerBox* player[maxPlayerBoxes];
 
+#define forEachPlayerBox(i) for (i = 0; i < maxPlayerBoxes; i++)
+
 // Functions that requires PlayerBox class
 
 void disableAllBuzzers() {
-  for (i = 0; i < maxPlayerBoxes; i++)
-  {
+  forEachPlayerBox(i) {
     player[i]->setBuzzer(LOW);
   }
 }
 
 void disableAllLights() {
-  for (i = 0; i < maxPlayerBoxes; i++)
-  {
+  forEachPlayerBox(i) {
     player[i]->setLights(LOW);
   }
 }
 
 void enableAllActiveLights() {
-  for (i = 0; i < maxPlayerBoxes; i++)
-  {
+  forEachPlayerBox(i) {
     if ( player[i]->isActive() ) {
       player[i]->setLights(HIGH);
     }
@@ -33,8 +32,7 @@ int getRandomActivePlayer(bool onlyPlayersWithPressedButton = false) {
   int listOfPlayers[maxPlayerBoxes];
   int numberOfPlayers = 0;
 
-  for (i = 0; i < maxPlayerBoxes; i++)
-  {
+  forEachPlayerBox(i) {
     if ( !player[i]->isActive() ) {
       continue;
     }
@@ -57,4 +55,22 @@ int getRandomActivePlayer(bool onlyPlayersWithPressedButton = false) {
    1. Only one player left (except when in 1-player mode)
    2. Some player scored N correct answers
 */
+
+/**
+   Checks if game should end now
+*/
+bool checkForGameEnd() {
+  Serial.println("Active players: " + String(activePlayers));
+  if ( 0 == activePlayers ) {
+    return true;
+  }
+
+  forEachPlayerBox(i) {
+    if ( player[i]->answersCorrect >= scoreToWin) {
+      return true;
+    }
+  }
+
+  return false;
+}
 

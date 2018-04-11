@@ -103,11 +103,18 @@ class PlayerBox {
       this->lives--;
 
       if (lives < 1) {
-        this->stateActive = false;
+        this->setStateActive(false);
         blinker(pinBuzzer, 20, 20, 15);
       }
-
     }
+    void showScore() {
+      blinker( this->getPinLights(), this->answersCorrect );
+    }
+    void showLives() {
+      int pinBadAnswer = silent ? pinHostLight : this->getPinBuzzer();
+      blinker( pinBadAnswer, this->lives );
+    }
+
     void debug() {
       Serial.println( "button: " + String(this->pinButton) + ", lights: " + String(this->pinLights) + ", buzzer: " + String(this->pinBuzzer) );
     }
@@ -120,4 +127,7 @@ class PlayerBox {
     int getPinBuzzer() {
       return this->pinBuzzer;
     }
+
 };
+
+

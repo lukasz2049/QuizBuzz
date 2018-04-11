@@ -20,3 +20,18 @@ void soundIncorrect() {
   }
   // TODO
 }
+
+void soundGameEnd() {
+  if (silent) {
+    return;
+  }
+  // TODO
+}
+
+
+void soundGameEndFail() {
+  if (silent) {
+    return;
+  }
+  // TODO
+}

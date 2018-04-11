@@ -9,15 +9,19 @@ void(* resetFunction) (void) = 0;
 /**
    Changes mode and runs before/after functions
    (After previous mode, Before new mode)
+   TODO: fixme - changeMode from AfterModeX (return true/false?)
 */
 void changeMode(int newMode) {
+  int oldMode = currentMode;
+  currentMode = Modes::LOADING;
+  
   // Wait until the button is released
   while (digitalRead(pinButtonConfirm) == LOW) {
     delay(10); // Debounce
   }
 
   // Prepare to changing the mode if needed
-  switch (currentMode) {
+  switch (oldMode) {
     case Modes::PREGAME:
       AfterModePregame();
       break;
@@ -38,10 +42,10 @@ void changeMode(int newMode) {
       break;
   }
 
+  // if(oldMode != currentMode) // check if this will fix things~
+
   Serial.println();
   Serial.println("Entering mode " + String(newMode));
-
-  currentMode = newMode;
 
   // Prepare to changing the mode if needed
   switch (newMode) {
@@ -64,6 +68,8 @@ void changeMode(int newMode) {
       BeforeModeTest();
       break;
   }
+  
+  currentMode = newMode;
 }
 
 /**

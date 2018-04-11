@@ -5,6 +5,10 @@ void BeforeModeHost() {
   disableAllLights();
   disableAllBuzzers();
   setHostLight(HIGH);
+  
+  if ( checkForGameEnd() ) {
+    changeMode(Modes::END);
+  }
 }
 
 /**
@@ -22,7 +26,7 @@ void ModeHost() {
     return;
   }
 
-  for (i = 0; i < maxPlayerBoxes; i++)
+  forEachPlayerBox(i)
   {
     if ( !player[i]->isActive() ) {
       continue;

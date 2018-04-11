@@ -22,7 +22,7 @@ void setup() {
   playerSelect[3] = 5;
   playerSelect[4] = 6;
 
-  for (i = 0; i < maxPlayerBoxes; i++) {
+  forEachPlayerBox(i) {
     pinMode(playerSelect[i], INPUT_PULLUP);
   }
 
