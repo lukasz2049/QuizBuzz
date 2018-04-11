@@ -47,7 +47,7 @@ Debug mode.
 ## Hardware needed 
 - 1 Arduino Mega (Due should also work fine, just keep in mind it's 3.3V)
 - 1 RGB LED (optional) or 1 LED in a different color than those of the players.
-- 2 buttons (Confirm and Cancel)
+- 3 buttons (Confirm and Cancel and Center)
 - 1 On/off switch or reset button
 - 1 LCD Display (optional)
 - 1 power supply (7-12V)
